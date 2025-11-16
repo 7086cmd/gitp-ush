@@ -2,6 +2,15 @@
 name = "gitp-ush"
 version = "0.1.0"
 edition = "2024"
+authors = ["7086cmd"]
+description = "Turn your typo into a feature - 'gitp ush' automatically executes 'git push -u origin <branch>'"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/7086cmd/gitp-ush"
+homepage = "https://github.com/7086cmd/gitp-ush"
+documentation = "https://github.com/7086cmd/gitp-ush#readme"
+readme = "README.md"
+keywords = ["git", "cli", "developer-tools", "automation"]
+categories = ["command-line-utilities", "development-tools"]
 
 [[bin]]
 name = "gitp"
