@@ -1,18 +1,15 @@
 # gitp-ush
 
-A small demo that automatically corrects git typos and simplifies git push with automatic upstream setting.
+Write `gitp ush` and execute `git push -u origin <current-branch>`.
+
+A small demo that turns your typo into a feature - making `gitp ush` a shortcut for `git push` with automatic upstream setting.
 
 ## Features
 
-- **Typo Autocorrection**: Automatically detects and corrects common git push typos:
-  - `gitp ush` → `git push`
-  - `git psuh` → `git push`
-  - `git puhs` → `git push`
-  - `git pus` → `git push`
-  - `gi tpush` → `git push`
-  - `gti push` → `git push`
-
-- **Automatic Upstream**: Automatically adds `-u origin <current-branch>` to git push commands
+- Simple typo-to-feature conversion: `gitp ush` → `git push -u origin <branch>`
+- Automatically detects your current git branch
+- Automatically sets upstream tracking
+- Supports additional git push arguments
 
 ## Installation
 
@@ -20,11 +17,16 @@ A small demo that automatically corrects git typos and simplifies git push with 
 cargo build --release
 ```
 
-Optional: Add to your PATH or create an alias:
+The binary will be created at `./target/release/gitp`
+
+Optional: Add to your PATH:
 
 ```bash
-# Add alias to your shell config (.bashrc, .zshrc, etc.)
-alias gitp='cargo run --quiet --'
+# Copy to a directory in your PATH
+sudo cp ./target/release/gitp /usr/local/bin/
+
+# Or add an alias to your shell config (.bashrc, .zshrc, etc.)
+alias gitp='/path/to/target/release/gitp'
 ```
 
 ## Usage
@@ -32,48 +34,36 @@ alias gitp='cargo run --quiet --'
 ### Basic usage:
 
 ```bash
-# Using cargo run
-cargo run -- gitp ush
-
-# Or if you built the release binary
-./target/release/gitp-ush gitp ush
+gitp ush
 ```
 
 ### What happens:
 
 ```
-🔧 Autocorrecting: 'gitp ush' -> 'git push'
-📍 Current branch: main
-🚀 Executing: git push -u origin main
-✅ Successfully pushed to origin/main
+Current branch: main
+Executing: git push -u origin main
+Successfully pushed to origin/main
 ```
 
-### More examples:
+### With additional arguments:
 
 ```bash
-# All of these work the same way:
-cargo run -- gitp ush
-cargo run -- git psuh
-cargo run -- git push
-cargo run -- gti push
-
-# With additional arguments:
-cargo run -- gitp ush --force
-cargo run -- git push --tags
+gitp ush --force
+gitp ush --tags
+gitp ush --force-with-lease
 ```
 
 ## How it works
 
-1. Detects common typos in the input
-2. Automatically corrects them
-3. Gets the current git branch
-4. Executes `git push -u origin <branch>` with any additional arguments
-5. Reports success or failure
+1. You run `gitp ush` (either by typo or intentionally)
+2. The tool detects the current git branch
+3. Executes `git push -u origin <branch>` with any additional arguments
+4. Sets upstream tracking automatically
 
 ## Demo Purpose
 
-This is a demonstration project showing how to build a CLI tool that:
+This demonstrates how to build a simple CLI tool in Rust that:
 - Parses command-line arguments
-- Detects and corrects typos
-- Interacts with git commands
-- Provides user-friendly output
+- Executes git commands programmatically
+- Provides a better UX by automating common tasks
+- Turns a common typo into a useful feature
