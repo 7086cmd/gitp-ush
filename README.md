@@ -63,6 +63,7 @@ gitp ush --force-with-lease
 ## Demo Purpose
 
 This demonstrates how to build a simple CLI tool in Rust that:
+
 - Parses command-line arguments
 - Executes git commands programmatically
 - Provides a better UX by automating common tasks
